@@ -1,11 +1,17 @@
 document.addEventListener("DOMContentLoaded", async () => {
     await fetchCategoryTypes();
     populateYearFilter();
+    createFilterRow(); // ✅ Agregar filtros en la parte superior
+    document.getElementById("yearFilter").addEventListener("change", applyFilters);
 });
 
 const addedCategoryTypes = new Set();
 
-// ✅ Obtener los tipos de categoría
+const months = [
+    "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+];
+
 async function fetchCategoryTypes() {
     try {
         const response = await fetch('/api/balance/categoryTypes');
@@ -21,7 +27,6 @@ async function fetchCategoryTypes() {
     }
 }
 
-// ✅ Obtener las categorías por tipo
 async function fetchCategories(categoryType) {
     try {
         const response = await fetch(`/api/balance/category?category_type_id=${categoryType.id}`);
@@ -37,7 +42,6 @@ async function fetchCategories(categoryType) {
     }
 }
 
-// ✅ Obtener las subcategorías y renderizar
 async function fetchSubCategories(categoryType, category) {
     try {
         const response = await fetch(`/api/balance/subCategory?category_id=${category.id}`);
@@ -51,7 +55,7 @@ async function fetchSubCategories(categoryType, category) {
         console.error('Error:', error);
     }
 }
-// ✅ Renderizar la tabla sin duplicar los tipos de categoría
+
 function renderRow(categoryType, category, subCategories) {
     const tableBody = document.getElementById("balanceTableBody");
     if (!tableBody) {
@@ -70,7 +74,8 @@ function renderRow(categoryType, category, subCategories) {
             <tr>
                 <td class="border p-2">${categoryTypeName}</td>
                 <td class="border p-2">${category.name}</td>
-                <td class="border p-2 text-gray-400">-</td>
+                <td class="border p-2">${createMonthSelect()}</td>
+                <td class="border p-2">${createMonthSelect()}</td>
             </tr>`;
     } else {
         subCategories.forEach((subCategory, index) => {
@@ -78,13 +83,24 @@ function renderRow(categoryType, category, subCategories) {
                 <tr>
                     <td class="border p-2">${index === 0 ? categoryTypeName : ""}</td>
                     <td class="border p-2">${index === 0 ? category.name : ""}</td>
-                    <td class="border p-2">${subCategory.name}</td>
+                    <td class="border p-2">${subCategory.name || createMonthSelect()}</td>
+                    <td class="border p-2">${createMonthSelect()}</td>
                 </tr>`;
         });
     }
 }
 
-// ✅ Renderizar categorías y añadir botón de "Añadir"
+function createMonthSelect() {
+    let select = `<select class="border p-1 rounded w-full">
+        <option value="">...</option>`; // Opción vacía inicial
+    ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
+        .forEach((month, index) => {
+            select += `<option value="${index + 1}">${month}</option>`;
+        });
+    select += `</select>`;
+    return select;
+}
+
 function renderCategory(categoryType, category, subCategories) {
     const container = document.getElementById("balanceContainer");
     if (!container) {
@@ -110,8 +126,8 @@ function renderCategory(categoryType, category, subCategories) {
         categoryHTML += `
             <div class="flex space-x-2 bg-white p-2 border rounded shadow-sm">
                 <div class="flex-1">${subCategory.name}</div>
-                <div class="w-20 border-l px-2 text-gray-500">-</div> <!-- Columna adicional 1 -->
-                <div class="w-20 border-l px-2 text-gray-500">-</div> <!-- Columna adicional 2 -->
+                <input type="text" class="border p-1 rounded w-24 text-center" placeholder="..." />
+                <input type="text" class="border p-1 rounded w-24 text-center" placeholder="..." />
             </div>`;
     });
 
@@ -125,7 +141,6 @@ function renderCategory(categoryType, category, subCategories) {
     container.innerHTML += categoryHTML;
 }
 
-// ✅ Mostrar ventana flotante
 function openAddSubCategoryModal(categoryId) {
     const modal = document.getElementById("addSubCategoryModal");
     const modalContent = modal.querySelector("div");
@@ -151,7 +166,6 @@ function closeAddSubCategoryModal() {
     }, 300);
 }
 
-// ✅ Enviar nueva subcategoría al backend
 async function submitSubCategory() {
     const categoryId = document.getElementById("categoryIdInput").value;
     const subCategoryName = document.getElementById("subCategoryNameInput").value;
@@ -227,10 +241,10 @@ function showNotification(message, type = "success") {
     }, 3000);
 }
 
-// ✅ Poblar filtro de año
 function populateYearFilter() {
     const yearFilter = document.getElementById("yearFilter");
     const currentYear = new Date().getFullYear();
+    
     for (let year = currentYear; year >= currentYear - 10; year--) {
         const option = document.createElement("option");
         option.value = year;
@@ -238,6 +252,53 @@ function populateYearFilter() {
         yearFilter.appendChild(option);
     }
 }
+
+document.getElementById('menuToggle').addEventListener('click', function () {
+    let menu = document.getElementById('menuMobile');
+    menu.classList.toggle('hidden');
+
+    if (!menu.classList.contains('hidden')) {
+        menu.classList.remove('scale-95', 'opacity-0');
+        menu.classList.add('scale-100', 'opacity-100');
+    } else {
+        menu.classList.remove('scale-100', 'opacity-100');
+        menu.classList.add('scale-95', 'opacity-0');
+    }
+});
+
+function applyFilters() {
+    const selectedYear = document.getElementById("yearFilter").value;
+    console.log(`Filtrando por el año: ${selectedYear}`);
+
+    // Aquí puedes agregar lógica para filtrar los datos basados en el año seleccionado
+}
+function createFilterRow() {
+    const tableHead = document.getElementById("balanceTableHead");
+    if (!tableHead) {
+        console.error("Elemento balanceTableHead no encontrado");
+        return;
+    }
+
+    tableHead.innerHTML = `
+        <tr>
+            <th class="border p-2">Categoría</th>
+            <th class="border p-2">Subcategoría</th>
+            <th class="border p-2">
+                Año: ${createYearSelect("yearFilter1")} 
+                Mes: ${createMonthSelect("monthFilter1")}
+            </th>
+            <th class="border p-2">
+                Año: ${createYearSelect("yearFilter2")} 
+                Mes: ${createMonthSelect("monthFilter2")}
+            </th>
+        </tr>`;
+
+    document.getElementById("yearFilter1").addEventListener("change", applyFilters);
+    document.getElementById("monthFilter1").addEventListener("change", applyFilters);
+    document.getElementById("yearFilter2").addEventListener("change", applyFilters);
+    document.getElementById("monthFilter2").addEventListener("change", applyFilters);
+}
+
 window.logout = logout;
 window.openAddSubCategoryModal = openAddSubCategoryModal;
 window.closeAddSubCategoryModal = closeAddSubCategoryModal;

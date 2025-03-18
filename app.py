@@ -25,8 +25,14 @@ def create_app():
     # Registrar blueprints
     from routes.user_routes import user_bp
     from routes.financial_statement_routes import financial_statement_bp
+    from routes.analisis import analisis
+    from routes.profiability import profiability_bp
+    from routes.management import management_bp
     app.register_blueprint(financial_statement_bp, url_prefix="/api")
+    app.register_blueprint(analisis, url_prefix="/api")
     app.register_blueprint(user_bp, url_prefix="/api")
+    app.register_blueprint(profiability_bp, url_prefix="/api")
+    app.register_blueprint(management_bp, url_prefix="/api")
 
     return app
 

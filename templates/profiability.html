@@ -51,63 +51,9 @@
 <div class="container mx-auto bg-white p-6 mt-4 shadow-lg rounded-lg">
     <h1 class="text-2xl font-bold text-gray-700 mb-4">📊 Balance Financiero</h1>
     <div class="flex space-x-4 mb-4">
-        <!-- Filtro por Año -->
-        <div>
-            <label for="yearFilter" class="block font-semibold">Selecciona el año:</label>
-                <select id="yearFilter" class="border p-2 rounded">
-                    <!-- Opciones generadas dinámicamente -->
-                </select>
-        </div>
     
-          <!-- Filtro por Meses (Selección múltiple) -->
-        <div>
-            <label for="monthFilter" class="block font-semibold">Seleccionar Meses:</label>
-            <select id="monthFilter" multiple class="p-2 border rounded w-40">
-                <option value="1">Enero</option>
-                <option value="2">Febrero</option>
-                <option value="3">Marzo</option>
-                <option value="4">Abril</option>
-                <option value="5">Mayo</option>
-                <option value="6">Junio</option>
-                <option value="7">Julio</option>
-                <option value="8">Agosto</option>
-                <option value="9">Septiembre</option>
-                <option value="10">Octubre</option>
-                <option value="11">Noviembre</option>
-                <option value="12">Diciembre</option>
-            </select>
-        </div> 
-    
-        <!-- Botón de Filtrar -->
-        <div class="flex items-end">
-            <button onclick="applyFilters()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Aplicar Filtro
-            </button>
-        </div>
     </div>
     
-    <!-- 📌 Contenedor para mostrar los datos verticalmente -->
-    <div id="balanceContainer" class="max-w-md mx-auto mt-4"></div> 
-        <!-- ✅ Ventana flotante para añadir subcategoría -->
-        <div id="addSubCategoryModal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg w-96 transform scale-95 opacity-0 transition-all duration-300">
-                <h2 class="text-lg font-bold mb-4 text-center">Añadir Subcategoría</h2>
-                
-                <input type="hidden" id="categoryIdInput">
-                
-                <label class="block mb-2">Nombre de la Subcategoría:</label>
-                <input type="text" id="subCategoryNameInput" class="w-full p-2 border rounded mb-4">
-                
-                <div class="flex justify-between">
-                    <button onclick="closeAddSubCategoryModal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-                        Cancelar
-                    </button>
-                    <button onclick="submitSubCategory()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-                        Guardar
-                    </button>
-                </div>
-            </div>
-        </div>
     <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
 </div>
 </body>
