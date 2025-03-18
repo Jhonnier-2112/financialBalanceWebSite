@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2"></div>
+    <div class="login-container">
+        <div class="left-section">
+            <h2>Bienvenidos!</h2>
+            <div class="logo-container">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ProfitShield Logo" class="logo">
+            </div>
+        </div>
+        <div class="form-section">
+            <form id="registerForm">
+                <label for="email">Email</label>
+                <input type="email" id="email" placeholder="Ingrese su email" required>
+                
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Ingrese su contraseña" required>
+                    <span id="togglePassword" class="toggle-password">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                </div>                
+
+                <button type="submit" class="login-btn">Ingresar</button>
+
+                <div class="links">
+                    <a href="#">Recuperar contraseña</a> - <a href="#">Generar Contraseña</a>
+                </div>
+
+                <a href="{{ url_for('user_bp.register_page') }}" class="register-btn">Registrar</a>
+            </form>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Financiero</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="{{ url_for('static', filename='js/balance/balance.js') }}"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+<!-- Navbar -->
+<nav class="bg-gray-400 border-b border-gray-500 shadow-md w-full">
+    <div class="max-w-screen-xl flex items-center justify-between mx-auto p-4">
+        <!-- Logo -->
+        <div class="flex items-center space-x-3 flex-shrink-0">
+            <img src="{{ url_for('static', filename='images/logo_mini.png') }}" class="h-8" alt="Logo" />
+            <span class="text-2xl font-semibold text-black">PROFITSSHIELD</span>
+        </div>
+
+        <!-- Menú de escritorio -->
+        <div id="menuDesktop" class="hidden md:flex flex-wrap justify-center w-full mt-2 gap-y-4 gap-x-2">
+            <a href="#" class="menu-item">Estados Financieros</a>
+            <a href="#" class="menu-item">Análisis Financiero</a>
+            <a href="#" class="menu-item">Análisis de Rentabilidad</a>
+            <a href="#" class="menu-item">Análisis de Gestión</a>
+            <a href="#" class="menu-item">Flujo de Caja</a>
+        </div>
+
+        <!-- Botón Logout -->
+        <button onclick="logout()" class="hidden md:block bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition">
+            Salir
+        </button>
+
+        <!-- Botón para el menú móvil -->
+        <button id="menuToggle" class="md:hidden text-white text-2xl focus:outline-none">
+            ☰
+        </button>
+    </div>
+
+    <!-- Menú desplegable en móviles -->
+    <div id="menuMobile" class="hidden flex-col space-y-2 p-4 md:hidden w-full">
+        <a href="#" class="menu-item">Estados Financieros</a>
+        <a href="#" class="menu-item">Análisis Financiero</a>
+        <a href="#" class="menu-item">Análisis de Rentabilidad</a>
+        <a href="#" class="menu-item">Análisis de Gestión</a>
+        <a href="#" class="menu-item">Flujo de Caja</a>
+        <button onclick="logout()" class="block w-full bg-red-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition">
+            Salir
+        </button>
+    </div>
+</nav>
+
+<!-- Contenido Principal -->
+<div class="container mx-auto bg-white p-6 mt-4 shadow-lg rounded-lg">
+    <h1 class="text-2xl font-bold text-gray-700 mb-4">📊 Balance Financiero</h1>
+    
+    <div class="flex space-x-4 mb-4">
+        <!-- Filtro por Año -->
+        <div>
+            <label for="yearFilter" class="block font-semibold">Seleccionar Año:</label>
+            <select id="yearFilter" class="p-2 border rounded w-32"></select>
+        </div>
+
+        <!-- Filtro por Mes -->
+        <div>
+            <label for="monthFilter" class="block font-semibold">Seleccionar Meses:</label>
+            <select id="monthFilter" multiple class="p-2 border rounded w-40">
+                <option value="1">Enero</option>
+                <option value="2">Febrero</option>
+                <option value="3">Marzo</option>
+                <option value="4">Abril</option>
+                <option value="5">Mayo</option>
+                <option value="6">Junio</option>
+                <option value="7">Julio</option>
+                <option value="8">Agosto</option>
+                <option value="9">Septiembre</option>
+                <option value="10">Octubre</option>
+                <option value="11">Noviembre</option>
+                <option value="12">Diciembre</option>
+            </select>
+        </div>
+
+        <!-- Botón de Filtrar -->
+        <div class="flex items-end">
+            <button onclick="applyFilters()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Aplicar Filtro
+            </button>
+        </div>
+    </div>
+
+    <!-- Contenedor de Balance -->
+    <div id="balanceContainer" class="max-w-md mx-auto mt-4"></div>
+
+    <!-- Modal para añadir subcategoría -->
+    <div id="addSubCategoryModal" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96 transform transition-all duration-300">
+            <h2 class="text-lg font-bold mb-4 text-center">Añadir Subcategoría</h2>
+            
+            <input type="hidden" id="categoryIdInput">
+            
+            <label class="block mb-2">Nombre de la Subcategoría:</label>
+            <input type="text" id="subCategoryNameInput" class="w-full p-2 border rounded mb-4">
+            
+            <div class="flex justify-between">
+                <button onclick="closeAddSubCategoryModal()" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
+                    Cancelar
+                </button>
+                <button onclick="submitSubCategory()" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificaciones -->
+    <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
+</div>

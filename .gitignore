@@ -1,0 +1,22 @@
+# Archivos de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Entorno virtual
+venv/
+env/
+
+# Configuración del editor
+.vscode/
+.idea/
+
+# Archivos de logs y caché
+*.log
+*.sqlite3
+.DS_Store
+
+# Dependencias de Node.js si usas Tailwind con npm
+node_modules/
+dist/

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<body>
+    <div id="toast-container" class="fixed top-5 right-5 z-50 space-y-2"></div>
+    <div class="login-container">
+        <div class="form-section">
+            <form id="registerForm">
+                <label for="name">Nombres:</label>
+                <input type="text" id="name" placeholder="Ingrese su nombre" required>
+    
+                <label for="email">Correo:</label>
+                <input type="email" id="email" placeholder="Ingrese su correo" required>
+    
+                <label for="password">Password:</label>
+                <div class="password-container">
+                    <input type="password" id="password" placeholder="Ingrese su contraseña" required>
+                    <span id="togglePassword" class="toggle-password">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                </div>
+    
+                <label for="confirmPassword">Confirmar Contraseña:</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" placeholder="Confirme su contraseña" required>
+                    <span class="toggle-password" id="toggleConfirmPassword">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                </div>
+    
+                <button type="submit" class="register-btn">Guardar</button>
+            </form>
+        </div>
+            <div class="right-section">
+            <h2>Crear cuenta</h2>
+            <div class="logo-container-register">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="ProfitShield Logo" class="logo-registro">
+            </div>
+        </div>
+    </div>    
+    <script src="{{ url_for('static', filename='js/register.js') }}" defer></script>
+</body>
+</html>
