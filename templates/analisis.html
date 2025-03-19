@@ -49,19 +49,112 @@
 
 <!-- Contenido Principal -->
 <div class="container mx-auto bg-white p-6 mt-4 shadow-lg rounded-lg">
-    <h1 class="text-2xl font-bold text-gray-700 mb-4">📊 Balance Financiero</h1>
-    <div class="flex space-x-4 mb-4">
+    <div class="flex justify-between items-center mb-4">
+        <!-- Título a la izquierda -->
+        <h1 class="text-2xl font-bold text-gray-700">📊 Balance Financiero</h1>
+        <!-- Botón para descargar Excel a la derecha -->
+        <button class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">
+            Descargar Excel 📥
+        </button>
+    </div>    <div class="flex space-x-4 mb-4">
         <div class="overflow-x-auto mt-6">
             <table class="w-full text-sm text-left border-collapse border border-gray-300">
-                <thead class="bg-gray-200 text-gray-700 uppercase text-xs">
-                    <tr>
-                        <th class="border border-gray-300 px-4 py-2">RATIOS DE GESTIÓN</th>
-                        <th class="border border-gray-300 px-4 py-2">2024 (Jul-Dic)</th>
-                        <th class="border border-gray-300 px-4 py-2">Fórmula</th>
-                        <th class="border border-gray-300 px-4 py-2">Significado</th>
-                        <th class="border border-gray-300 px-4 py-2">Alerta</th>
-                    </tr>
-                </thead>
+                <table class="min-w-full bg-white border border-gray-300">
+                    <thead>
+                        <tr class="bg-blue-200 text-left">
+                            <th class="border px-4 py-2">RATIOS FINANCIEROS</th>
+                            <th class="border px-4 py-2">
+                                <select id="yearFilter" class="border p-1 bg-white">
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                                <select id="monthFilter" class="border p-1 bg-white">
+                                    <option value="Jul-Dic">Jul-Dic</option>
+                                    <option value="Ene-Jun">Ene-Jun</option>
+                                </select>
+                            </th>
+                            <th class="border px-4 py-2">
+                                <select id="yearFilter2" class="border p-1 bg-white">
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                                <select id="monthFilter2" class="border p-1 bg-white">
+                                    <option value="Jul-Dic">Jul-Dic</option>
+                                    <option value="Ene-Jun">Ene-Jun</option>
+                                </select>
+                            </th>
+                            <th class="border px-4 py-2">
+                                <select id="yearFilter3" class="border p-1 bg-white">
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                </select>
+                                <select id="monthFilter2" class="border p-1 bg-white">
+                                    <option value="Jul-Dic">Jul-Dic</option>
+                                    <option value="Ene-Jun">Ene-Jun</option>
+                                </select>
+                            </th>
+                            <th class="border px-4 py-2">FÓRMULA</th>
+                            <th class="border px-4 py-2">SIGNIFICADO</th>
+                            <th class="border px-4 py-2">ALERTA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-blue-50">
+                            <td class="border px-4 py-2">Caja y Bancos</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">DISPON. + REALIZABLE / OBLIGACIONES A CORTO PLAZO</td>
+                            <td class="border px-4 py-2">Capacidad de la empresa para cubrir sus obligaciones a corto plazo sin necesidad de liquidar inventarios.</td>
+                            <td class="border px-4 py-2">-</td>
+                        </tr>
+                        <tr class="bg-white">
+                            <td class="border px-4 py-2">Indicador de Liquidez</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">ACTIVO CORRIENTE / PASIVO CORRIENTE</td>
+                            <td class="border px-4 py-2">Capacidad de la empresa para atender compromisos de corto plazo mediante la realización de activos corrientes.</td>
+                            <td class="border px-4 py-2">-</td>
+                        </tr>
+                        <tr class="bg-blue-50">
+                            <td class="border px-4 py-2">Autonomía Financiera</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">PATRIMONIO / ACTIVOS TOTALES</td>
+                            <td class="border px-4 py-2">Autonomía financiera que mide el nivel de autofinanciación de la empresa.</td>
+                            <td class="border px-4 py-2">-</td>
+                        </tr>
+                        <tr class="bg-blue-50">
+                            <td class="border px-4 py-2">Grado de Endeudamiento</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">PASIVO / PATRIMONIO</td>
+                            <td class="border px-4 py-2">Relación entre la financiación con recursos propios y la financiación con recursos ajenos.</td>
+                            <td class="border px-4 py-2">-</td>
+                        </tr>
+                        <tr class="bg-blue-50">
+                            <td class="border px-4 py-2">Estabilidad Financiera</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">ACTIVO NO CORRIENTE / PASIVO A LARGO PLAZO + PATRIMONIO</td>
+                            <td class="border px-4 py-2">Forma en que se financia el inmovilizado (activos fijos).</td>
+                            <td class="border px-4 py-2">-</td>
+                        </tr>
+                        <tr class="bg-blue-50">
+                            <td class="border px-4 py-2">Capital de trabajo</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">-</td>
+                            <td class="border px-4 py-2">RECURSOS A LARGO PLAZO</td>
+                            <td class="border px-4 py-2">Capital de trabajo: parte del activo corriente financiada con recursos a largo plazo.</td>
+                            <td class="border px-4 py-2">-</td>
+                        </tr>
+                    </tbody>
+                </table>
                 <tbody id="ratiosTableBody" class="text-gray-600">
                     <!-- Datos serán cargados dinámicamente -->
                 </tbody>

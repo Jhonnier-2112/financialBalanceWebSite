@@ -49,9 +49,93 @@
 
 <!-- Contenido Principal -->
 <div class="container mx-auto bg-white p-6 mt-4 shadow-lg rounded-lg">
-    <h1 class="text-2xl font-bold text-gray-700 mb-4">📊 Balance Financiero</h1>
-    <div class="flex space-x-4 mb-4">
-    
+    <div class="flex justify-between items-center mb-4">
+        <!-- Título a la izquierda -->
+        <h1 class="text-2xl font-bold text-gray-700">📊 Balance Financiero</h1>
+        <!-- Botón para descargar Excel a la derecha -->
+        <button class="bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600 transition">
+            Descargar Excel 📥
+        </button>
+    </div>    <div class="flex space-x-4 mb-4">
+        <table class="min-w-full bg-white border border-gray-300">
+            <thead>
+                <tr class="bg-blue-200 text-left">
+                    <th class="border px-4 py-2">RATIOS RENTABILIDAD</th>
+                    <th class="border px-4 py-2">
+                        <select id="yearFilter" class="border p-1 bg-white">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select id="monthFilter" class="border p-1 bg-white">
+                            <option value="Jul-Dic">Jul-Dic</option>
+                            <option value="Ene-Jun">Ene-Jun</option>
+                        </select>
+                    </th>
+                    <th class="border px-4 py-2">
+                        <select id="yearFilter2" class="border p-1 bg-white">
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                        </select>
+                        <select id="monthFilter2" class="border p-1 bg-white">
+                            <option value="Jul-Dic">Jul-Dic</option>
+                            <option value="Ene-Jun">Ene-Jun</option>
+                        </select>
+                    </th>
+                    <th class="border px-4 py-2">Fórmula</th>
+                    <th class="border px-4 py-2">Significado</th>
+                    <th class="border px-4 py-2">ALERTA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="bg-blue-50">
+                    <td class="border px-4 py-2">Financiera</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">(Bº + G. FINANC.) x 100 / RECURS. TOTALES</td>
+                    <td class="border px-4 py-2">Rentabilidad financiera de todos los recursos empleados en la empresa.</td>
+                    <td class="border px-4 py-2">-</td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="border px-4 py-2">Recursos Propios</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">RESULTADO NETO x 100 / RECURSOS PROPIOS</td>
+                    <td class="border px-4 py-2">Rentabilidad de los recursos propios.</td>
+                    <td class="border px-4 py-2">-</td>
+                </tr>
+                <tr class="bg-blue-50">
+                    <td class="border px-4 py-2">Global</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">RESULTADO NETO x 100 / RECURSOS TOTALES</td>
+                    <td class="border px-4 py-2">Rentabilidad económica de todos los recursos empleados.</td>
+                    <td class="border px-4 py-2">-</td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="border px-4 py-2">De Capital</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">RESULTADO NETO x 100 / CAPITAL SOCIAL</td>
+                    <td class="border px-4 py-2">Rentabilidad del capital social.</td>
+                    <td class="border px-4 py-2">-</td>
+                </tr>
+                <tr class="bg-blue-50">
+                    <td class="border px-4 py-2">Rent. Ventas</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">RESULTADO NETO x 100 / VENTAS</td>
+                    <td class="border px-4 py-2">Rentabilidad de las ventas.</td>
+                    <td class="border px-4 py-2">-</td>
+                </tr>
+                <tr class="bg-white">
+                    <td class="border px-4 py-2">Margen sobre ventas</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">-</td>
+                    <td class="border px-4 py-2">MARGEN x 100 / VENTAS</td>
+                    <td class="border px-4 py-2">Porcentaje de margen sobre ventas.</td>
+                    <td class="border px-4 py-2">-</td>
+                </tr>
+            </tbody>
     </div>
     
     <div id="notificationContainer" class="fixed top-4 right-4 z-50 space-y-2"></div>
