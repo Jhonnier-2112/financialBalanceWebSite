@@ -34,8 +34,15 @@ def create_app():
     app.register_blueprint(profiability_bp, url_prefix="/api")
     app.register_blueprint(management_bp, url_prefix="/api")
 
+    @app.route('/')
+    def home():
+        return "¡La API está funcionando correctamente! 🚀"
+
+
     return app
 
+
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 10000))  # Render usa la variable PORT
     app = create_app()
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    app.run(host="0.0.0.0", port=port)
