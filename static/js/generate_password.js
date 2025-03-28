@@ -4,7 +4,7 @@ document.getElementById('generatePasswordForm').addEventListener('submit', async
     const message = document.getElementById('message');
     
     try {
-        const response = await fetch('/api/generate_password', {
+        const response = await fetch('/api/users/generate_password', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email })
