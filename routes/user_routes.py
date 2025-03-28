@@ -1,25 +1,32 @@
-from flask import Blueprint, render_template, request, jsonify
-from controllers.user_controller import register_user 
-from controllers.user_controller import login_user
+from flask import Blueprint, render_template, request
+from controllers.user_controller import register_user, login_user, reset_password
 
-user_bp = Blueprint('user_bp', __name__)
+user_bp = Blueprint("user_bp", __name__)
 
 # Ruta para mostrar el formulario de login
-@user_bp.route('/users/login', methods=['GET'])
+@user_bp.route("/login", methods=["GET"])
 def login_page():
-    return render_template('login.html')
+    return render_template("login.html")
 
 # Ruta para manejar el login
-@user_bp.route('/users/login', methods=['POST'])
+@user_bp.route("/login", methods=["POST"])
 def login():
     return login_user()
 
-# ➡ **Nueva ruta para el formulario de registro**
-@user_bp.route('/users/register', methods=['GET'])
+# Ruta para mostrar el formulario de registro
+@user_bp.route("/register", methods=["GET"])
 def register_page():
-    return render_template('register.html')
+    return render_template("register.html")
 
-# ➡ **Nueva ruta para manejar el registro de usuarios**
-@user_bp.route('/users/register', methods=['POST'])
+# Ruta para manejar el registro de usuarios
+@user_bp.route("/register", methods=["POST"])
 def register():
-    return register_user() 
+    return register_user()
+
+@user_bp.route("/generate_password", methods=["POST"])
+def reset():
+    return reset_password()
+
+@user_bp.route("/generate_password", methods=["GET"])
+def generated_password():
+    return render_template("generate_password.html")
