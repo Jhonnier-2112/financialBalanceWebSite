@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request
-from controllers.user_controller import register_user, login_user, reset_password
+from flask import Blueprint, jsonify, render_template, request
+from controllers.user_controller import register_user, login_user, change_password, reset_password
 
 user_bp = Blueprint("user_bp", __name__)
 
@@ -30,3 +30,11 @@ def reset():
 @user_bp.route("/users/generate_password", methods=["GET"])
 def generated_password():
     return render_template("generate_password.html")
+
+@user_bp.route("/users/reset_password", methods=["POST"])
+def change_password_mew():
+    return change_password()
+
+@user_bp.route("/users/reset_password", methods=["GET"])
+def generated_password_new():
+    return render_template("reset_password.html")
